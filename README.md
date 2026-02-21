@@ -57,6 +57,8 @@ sudo dnf install ffmpeg-libs
 
 ### Step 3: Install ADB (Android Debug Bridge)
 
+The `android-tools` package provides both `adb` and `fastboot`. Running `sudo dnf install adb` also works as it resolves to the same package.
+
 ```bash
 sudo dnf install android-tools
 ```
@@ -70,19 +72,7 @@ sudo dnf copr enable zeno/scrcpy
 sudo dnf install scrcpy
 ```
 
-### Step 5: Configure udev Rules for Android Devices
-
-Add a udev rule so ADB can detect your device without root. For OnePlus/OPPO devices (vendor ID `22d9`):
-
-```bash
-echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="22d9", MODE="0666", GROUP="plugdev"' | sudo tee /etc/udev/rules.d/51-android.rules
-sudo udevadm control --reload-rules
-sudo udevadm trigger
-```
-
-> **Note:** For other manufacturers, replace `22d9` with the correct vendor ID. Common IDs: Google=`18d1`, Samsung=`04e8`, Xiaomi=`2717`, Huawei=`12d1`.
-
-### Step 6: Enable USB Debugging on Android Device
+### Step 5: Enable USB Debugging on Android Device
 
 1. Go to **Settings → About Phone**
 2. Tap **Build Number** 7 times to enable Developer Options
@@ -91,7 +81,7 @@ sudo udevadm trigger
 5. Connect USB cable to your Linux machine
 6. On the phone, tap **Allow USB Debugging** when prompted (check "Always allow")
 
-### Step 7: Verify ADB Connection
+### Step 6: Verify ADB Connection
 
 ```bash
 # Check USB detection
@@ -105,7 +95,15 @@ adb devices
 # Should show: <serial>    device
 ```
 
-### Step 8: Verify scrcpy
+> **Troubleshooting:** If `adb devices` shows nothing, add a udev rule for your device. For OnePlus/OPPO (vendor ID `22d9`):
+> ```bash
+> echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="22d9", MODE="0666", GROUP="plugdev"' | sudo tee /etc/udev/rules.d/51-android.rules
+> sudo udevadm control --reload-rules
+> sudo udevadm trigger
+> ```
+> Common vendor IDs: Google=`18d1`, Samsung=`04e8`, Xiaomi=`2717`, Huawei=`12d1`.
+
+### Step 7: Verify scrcpy
 
 ```bash
 scrcpy --always-on-top
@@ -139,7 +137,7 @@ adb usb
 
 > **Security Note:** ADB over WiFi has no encryption after initial pairing. Always run `adb usb` to disable WiFi mode when done.
 
-### Step 10: Install DroidPulse Dependencies
+### Step 9: Install DroidPulse Dependencies
 
 ```bash
 cd droidpulse
@@ -148,7 +146,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### Step 11: Set Gemini API Key
+### Step 10: Set Gemini API Key
 
 ```bash
 export GEMINI_API_KEY="your-api-key-here"
