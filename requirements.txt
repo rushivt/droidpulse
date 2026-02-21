@@ -1,0 +1,5 @@
+#Python modules
+
+anthropic #for Claude API model
+rich  #for beautiful terminal output
+jinja2  #dynamic template engine for generating text files
