@@ -1,1 +1,23 @@
 #Files to ignore
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+venv/
+.env
+
+# Reports (generated files)
+reports/*.html
+
+# Logs
+logs/*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
