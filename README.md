@@ -2,14 +2,14 @@
 
 **AI-Powered Android Device Health Dashboard using ADB**
 
-DroidPulse connects to Android devices via ADB, collects system health data (battery, storage, apps, network, CPU/memory), and uses Google Gemini AI to analyze device health, flag issues, and generate actionable recommendations.
+DroidPulse connects to Android devices via ADB, collects system health data (battery, storage, apps, network, CPU/memory), and uses Groq AI (Llama 3.3 70B) to analyze device health, flag issues, and generate actionable recommendations.
 
 ## Features (Planned)
 
 - 📱 ADB Device Discovery — auto-detect USB and WiFi-connected devices
 - 🔋 Health Data Collection — battery, storage, memory, CPU, network, installed apps
 - 🌐 WiFi Diagnostics — signal strength, frequency band, latency, DNS checks
-- 🤖 AI-Powered Analysis — Gemini AI analyzes health data and flags issues
+- 🤖 AI-Powered Analysis — Groq AI (Llama 3.3) analyzes health data and flags issues
 - 📊 Terminal Dashboard — color-coded health summary in your terminal
 - 📄 HTML Reports — professional reports with health scores and recommendations
 - 📡 ADB over WiFi — manage devices wirelessly
@@ -20,7 +20,7 @@ DroidPulse connects to Android devices via ADB, collects system health data (bat
 - **Python 3** — core logic, data processing, AI integration
 - **Bash** — ADB command wrappers, automation scripts
 - **ADB** — Android device data collection
-- **Google Gemini AI** — AI-powered health analysis
+- **Groq AI (Llama 3.3 70B)** — AI-powered health analysis
 - **Rich** — terminal dashboard formatting
 - **Jinja2** — HTML report templating
 - **Fedora Linux** — host operating system
@@ -32,7 +32,7 @@ DroidPulse connects to Android devices via ADB, collects system health data (bat
 - Fedora Workstation (tested on Fedora 41)
 - Android device with USB cable (tested on OnePlus Nord AC2001, Android 12)
 - Python 3.x
-- Google Gemini API key (free at https://aistudio.google.com/apikey)
+- Groq API key (free at https://console.groq.com)
 
 ### Step 1: Install RPM Fusion Repositories
 
@@ -146,10 +146,10 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### Step 10: Set Gemini API Key
+### Step 10: Set Groq API Key
 
 ```bash
-export GEMINI_API_KEY="your-api-key-here"
+export GROQ_API_KEY="your-api-key-here"
 ```
 
 ## License
