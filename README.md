@@ -15,6 +15,10 @@ DroidPulse connects to Android devices via ADB, collects system health data (bat
 - 📡 ADB over WiFi — manage devices wirelessly
 - 🔁 Multi-Device Support — scan and report on multiple devices
 
+## Terminal Dashboard
+
+![DroidPulse Terminal Dashboard](docs/images/terminal_dashboard.png)
+
 ## Tech Stack
 
 - **Python 3** — core logic, data processing, AI integration
@@ -150,6 +154,29 @@ pip install -r requirements.txt
 
 ```bash
 export GROQ_API_KEY="your-api-key-here"
+```
+
+## Usage
+
+```bash
+# Activate virtual environment
+source venv/bin/activate
+
+# Run DroidPulse (default: terminal dashboard)
+cd src
+python main.py
+
+# JSON output only
+python main.py --json
+
+# Verbose mode (raw data + dashboard)
+python main.py --verbose
+
+# Generate HTML report
+python main.py --report
+
+# Target a specific device
+python main.py --device a9686ef3
 ```
 
 ## License
