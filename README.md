@@ -19,6 +19,10 @@ DroidPulse connects to Android devices via ADB, collects system health data (bat
 
 ![DroidPulse Terminal Dashboard](docs/images/terminal_dashboard.png)
 
+## HTML Report
+
+![DroidPulse HTML Report](docs/images/html_report.png)
+
 ## Tech Stack
 
 - **Python 3** — core logic, data processing, AI integration
