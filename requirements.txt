@@ -1,5 +1,5 @@
 #Python modules
 
-google-generativeai #for Google Gemini API model
+groq #for Groq API model
 rich  #for beautiful terminal output
 jinja2  #dynamic template engine for generating text files
