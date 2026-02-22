@@ -115,8 +115,7 @@ def get_storage(device_id=None):
         if len(parts) >= 6:
             mount = parts[5]
             # Only include important partitions
-            if mount in ("/", "/data", "/storage/emulated", "/system_ext",
-                         "/vendor", "/product"):
+            if mount in ("/data", "/storage/emulated"):
                 storage.append({
                     "filesystem": parts[0],
                     "size": parts[1],
