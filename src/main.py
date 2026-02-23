@@ -8,6 +8,7 @@ import json
 from collector import collect_all, get_connected_devices
 from analyzer import analyze
 from dashboard import display
+from wifi_manager import collect_network_diagnostics
 
 
 def main():
@@ -18,7 +19,19 @@ def main():
     parser.add_argument("-v", "--verbose", action="store_true", help="Show raw JSON data")
     parser.add_argument("-j", "--json", action="store_true", help="Output JSON only")
     parser.add_argument("-r", "--report", action="store_true", help="Generate HTML report")
+    parser.add_argument("-w", "--wifi", action="store_true", help="Switch to WiFi ADB mode")
+    parser.add_argument("--usb", action="store_true", help="Switch back to USB ADB mode")
     args = parser.parse_args()
+
+    # Handle WiFi/USB switching
+    if args.wifi:
+        from wifi_manager import switch_to_wifi
+        switch_to_wifi()
+        return
+    if args.usb:
+        from wifi_manager import switch_to_usb
+        switch_to_usb()
+        return
 
     # Find devices
     devices = get_connected_devices()
@@ -35,8 +48,12 @@ def main():
         print(f"  Available devices: {devices}")
         return
 
-    # Collect data
+    # Collect device data
     data = collect_all(device_id)
+
+    # Collect network diagnostics
+    net_diag = collect_network_diagnostics(device_id)
+    data["network_diagnostics"] = net_diag
 
     # Run AI analysis
     analysis = analyze(data)
