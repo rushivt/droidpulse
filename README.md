@@ -4,7 +4,7 @@
 
 DroidPulse connects to Android devices via ADB, collects system health data (battery, storage, apps, network, CPU/memory), and uses Groq AI (Llama 3.3 70B) to analyze device health, flag issues, and generate actionable recommendations.
 
-## Features (Planned)
+## Features
 
 - 📱 ADB Device Discovery — auto-detect USB and WiFi-connected devices
 - 🔋 Health Data Collection — battery, storage, memory, CPU, network, installed apps
@@ -12,8 +12,9 @@ DroidPulse connects to Android devices via ADB, collects system health data (bat
 - 🤖 AI-Powered Analysis — Groq AI (Llama 3.3) analyzes health data and flags issues
 - 📊 Terminal Dashboard — color-coded health summary in your terminal
 - 📄 HTML Reports — professional reports with health scores and recommendations
-- 🛜 ADB over WiFi — manage devices wirelessly
+- 📡 ADB over WiFi — manage devices wirelessly
 - 🔁 Multi-Device Support — scan and report on multiple devices
+- ⏱️ Automation Ready — supports scheduled scans via cron or systemd timers
 
 ## Terminal Dashboard
 
@@ -188,6 +189,62 @@ python main.py --wifi
 # Switch back to USB mode
 python main.py --usb
 ```
+
+## Architecture
+
+```
+┌─────────────────────────────────────────────────────┐
+│                    DroidPulse                        │
+├─────────────────────────────────────────────────────┤
+│                                                      │
+│  main.py (Entry Point)                              │
+│    ├── collector.py (ADB Data Collection)           │
+│    ├── wifi_manager.py (Network Diagnostics)        │
+│    ├── analyzer.py (AI Analysis)                    │
+│    │     ├── Groq API (Llama 3.3 70B)              │
+│    │     └── Rule-based fallback                    │
+│    ├── dashboard.py (Terminal Output)               │
+│    └── reporter.py (HTML Report)                    │
+│                                                      │
+│  scripts/                                            │
+│    ├── adb_commands.sh (Bash ADB wrappers)          │
+│    └── scan_all_devices.sh (Multi-device scanner)   │
+│                                                      │
+├─────────────────────────────────────────────────────┤
+│  Android Device ←── ADB (USB / WiFi) ──→ Fedora    │
+└─────────────────────────────────────────────────────┘
+```
+
+## Project Structure
+
+```
+droidpulse/
+├── README.md
+├── requirements.txt
+├── .gitignore
+├── LICENSE
+├── scripts/
+│   ├── adb_commands.sh          # Bash ADB wrappers
+│   └── scan_all_devices.sh      # Multi-device scanner
+├── src/
+│   ├── __init__.py
+│   ├── main.py                  # Entry point with CLI args
+│   ├── collector.py             # ADB data collection
+│   ├── analyzer.py              # Groq AI health analysis
+│   ├── dashboard.py             # Rich terminal dashboard
+│   ├── reporter.py              # HTML report generator
+│   └── wifi_manager.py          # WiFi diagnostics & ADB over WiFi
+├── reports/                     # Generated HTML reports
+├── docs/
+│   ├── runbook.md               # Troubleshooting & setup docs
+│   └── images/                  # Screenshots
+└── venv/                        # Python virtual environment
+```
+
+## Documentation
+
+- 📖 [Runbook](docs/runbook.md) — setup procedures, troubleshooting guide, ADB command reference, architecture
+- 📋 [Project Board](https://github.com/rushivt/droidpulse/projects) — development progress tracking
 
 ## License
 
