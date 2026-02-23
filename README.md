@@ -12,7 +12,7 @@ DroidPulse connects to Android devices via ADB, collects system health data (bat
 - 🤖 AI-Powered Analysis — Groq AI (Llama 3.3) analyzes health data and flags issues
 - 📊 Terminal Dashboard — color-coded health summary in your terminal
 - 📄 HTML Reports — professional reports with health scores and recommendations
-- 📡 ADB over WiFi — manage devices wirelessly
+- 🛜 ADB over WiFi — manage devices wirelessly
 - 🔁 Multi-Device Support — scan and report on multiple devices
 
 ## Terminal Dashboard
@@ -181,6 +181,12 @@ python main.py --report
 
 # Target a specific device
 python main.py --device a9686ef3
+
+# Switch to WiFi ADB mode
+python main.py --wifi
+
+# Switch back to USB mode
+python main.py --usb
 ```
 
 ## License
